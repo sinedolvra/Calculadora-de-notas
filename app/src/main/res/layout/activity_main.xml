@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/mediaFinal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,13 +47,14 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="35dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         android:text="Calcule a sua média!"
+        android:textAlignment="center"
         android:textSize="26sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -74,6 +82,7 @@
         android:id="@+id/mA1"
         android:layout_width="99dp"
         android:layout_height="28dp"
+        android:layout_marginTop="8dp"
         android:text="Nota A1"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -119,6 +128,8 @@
         android:id="@+id/calcularA1BTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Calcular A1"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -131,7 +142,7 @@
         android:id="@+id/notaFinal"
         android:layout_width="294dp"
         android:layout_height="50dp"
-        android:autoText="false"
+        android:layout_marginTop="16dp"
         android:text="Nota Final"
         android:textAlignment="center"
         android:textSize="32sp"
@@ -144,6 +155,7 @@
         android:id="@+id/notaFinalBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Calcular"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
@@ -209,7 +221,7 @@
         android:id="@+id/imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="54dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.373"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -230,3 +242,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

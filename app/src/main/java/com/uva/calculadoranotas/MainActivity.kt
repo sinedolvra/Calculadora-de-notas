@@ -80,8 +80,6 @@ class MainActivity : AppCompatActivity() {
         }
         notaFinalBTN.visibility = View.GONE
         notaFinal.visibility = View.VISIBLE
-        calcularA1BTN.visibility = View.VISIBLE
-        mA1.visibility = View.GONE
     }
 
     private fun refresh() {
