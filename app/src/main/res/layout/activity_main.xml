@@ -3,7 +3,6 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -66,12 +65,15 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Nota AVA1"></TextView>
-                <EditText android:layout_width="fill_parent"
+                    android:text="Nota AVA1"
+                    ></TextView>
+
+                <EditText
+                    android:id="@+id/ava1"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="0"
-                    android:id="@+id/ava1"/>
+                    android:text="" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -87,7 +89,7 @@
                 <EditText android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="0"
+                    android:text=""
                     android:id="@+id/ava2"/>
             </LinearLayout>
         </LinearLayout>
@@ -106,7 +108,7 @@
                 android:gravity="center"
                 android:layout_margin="20px">
                 <Button
-                    android:id="@+id/calcularA1BTN"
+                    android:id="@+id/btn_calcula_a_1"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
@@ -121,7 +123,7 @@
                 <TextView android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="0"
+                    android:text="-"
                     android:textSize="32sp"
                     android:textAlignment="center"
                     android:id="@+id/notaA1"/>
@@ -133,7 +135,8 @@
             android:layout_height="100px"></Space>
         <LinearLayout android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/notasSegundaEtapa">
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -148,7 +151,7 @@
                 <EditText android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="0"
+                    android:text=""
                     android:id="@+id/notaA2"/>
             </LinearLayout>
             <LinearLayout
@@ -165,34 +168,13 @@
                 <EditText android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="0"
+                    android:text=""
                     android:id="@+id/notaA3"/>
             </LinearLayout>
         </LinearLayout>
         <Space
             android:layout_width="match_parent"
             android:layout_height="100px"></Space>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:gravity="center">
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Média Final: "
-                android:textSize="70px">
-            </TextView>
-            <TextView android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="32sp"
-                android:id="@+id/notaFinal"/>
-        </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -201,7 +183,7 @@
 
             <Button
                 android:layout_weight="1"
-                android:id="@+id/btnMediaFinal"
+                android:id="@+id/btn_calcula_media_final"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Média final"
@@ -216,6 +198,63 @@
                 android:text="Reiniciar"
                 android:windowBackground="@color/yellowUva"
                 android:layout_margin="20px"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/resultadoFinal">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Média Final: "
+                    android:textSize="70px"
+                    android:layout_margin="30px">
+                </TextView>
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textAlignment="center"
+                    android:textSize="32sp"
+                    android:id="@+id/notaFinal"
+                    android:layout_margin="30px"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Resultado: "
+                    android:textSize="70px"
+                    android:layout_margin="30px">
+                </TextView>
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Aprovado"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:id="@+id/resultadoTxt"
+                    android:layout_margin="30px"
+                    android:textColor="@color/DarkBlue_UVA"
+
+                    android:drawableRight="@drawable/seta_launcher_foreground"/>
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
