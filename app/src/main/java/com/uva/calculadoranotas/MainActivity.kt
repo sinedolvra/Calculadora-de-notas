@@ -1,103 +1,123 @@
 package com.uva.calculadoranotas
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import androidx.core.widget.doAfterTextChanged
-import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.uva.calculadoranotas.databinding.ActivityMainBinding
+import java.math.RoundingMode
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var a1: String
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        notaFinalBTN.visibility = View.GONE
-        notaFinal.visibility = View.GONE
-        calcularA1BTN.visibility = View.VISIBLE
-        refresh.visibility = View.GONE
-
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        hideComponents()
         setListeners()
     }
 
+    private fun hideComponents() {
+        binding.btnCalculaMediaFinal.visibility = View.GONE
+        binding.resultadoFinal.visibility = View.GONE
+        binding.notaFinal.visibility = View.GONE
+        binding.refresh.visibility = View.GONE
+        binding.notasSegundaEtapa.visibility = View.GONE
+        binding.notaA1.text = ""
+    }
+    private fun showComponents(){
+        binding.btnCalculaMediaFinal.visibility = View.VISIBLE
+        binding.notaA1.visibility = View.VISIBLE
+        binding.notaFinal.visibility = View.VISIBLE
+        binding.refresh.visibility = View.VISIBLE
+        binding.notasSegundaEtapa.visibility = View.VISIBLE
+    }
+    private fun showResults(){
+        binding.btnCalculaMediaFinal.visibility = View.GONE
+        binding.notaFinal.visibility = View.VISIBLE
+        binding.resultadoFinal.visibility = View.VISIBLE
+    }
+
     private fun setListeners() {
-        ava1?.doAfterTextChanged {text ->
-
+        binding.refresh.setOnClickListener {
+            clear()
         }
 
-        ava2?.doAfterTextChanged {text ->
-
+        binding.btnCalculaA1.setOnClickListener {
+            if(isEmpty(binding.ava1) || isEmpty(binding.ava2)){
+                Toast.makeText(this@MainActivity, "Notas inválidas! Favor preencher corretamente", Toast.LENGTH_LONG).show()
+            }else{
+                calcularMediaA1(
+                    binding.ava1.text.toString().toFloat(),
+                    binding.ava2.text.toString().toFloat()
+                )
+            }
         }
 
-        a2?.doAfterTextChanged {text ->
-
+        binding.btnCalculaMediaFinal.setOnClickListener {
+            if(isEmpty(binding.notaA1) || isEmpty(binding.notaA2) || isEmpty(binding.notaA3)){
+                Toast.makeText(this@MainActivity, "Notas inválidas! Favor preencher corretamente", Toast.LENGTH_LONG).show()
+            }else{
+                calcularMediaFinal(
+                    binding.notaA1.text.toString().toFloat(),
+                    binding.notaA2.text.toString().toFloat(),
+                    binding.notaA3.text.toString().toFloat()
+                )
+            }
         }
-
-        a3?.doAfterTextChanged {text ->
-
-        }
-
-        refresh?.setOnClickListener {
-            refresh()
-        }
-
-       calcularA1BTN?.setOnClickListener {
-            calcularMediaA1(ava1.text.toString(), ava2.text.toString())
-        }
-
-       notaFinalBTN?.setOnClickListener {
-            calcularMediaFinal(a1, a2.text.toString(), a3.text.toString())
-       }
-
     }
 
-    private fun calcularMediaA1(ava1: String, ava2: String) {
-        val ava1 = ava1.toFloatOrNull()
-        val ava2 = ava2.toFloatOrNull()
-        if(ava1 != null && ava2 != null) {
-            val mediaA1 = (ava1 + ava2) / 2
-            a1 = mediaA1.toString()
-            mA1.text = "A1: %.1f".format(mediaA1)
-            notaFinalBTN.visibility = View.VISIBLE
-            calcularA1BTN.visibility = View.GONE
-            mA1.visibility = View.VISIBLE
-            notaFinal.visibility = View.GONE
-            refresh.visibility = View.VISIBLE
-        }
-
+    private fun isEmpty(etText: EditText): Boolean {
+        return etText.text.toString().trim().isEmpty()
+    }
+    private fun isEmpty(etText: TextView): Boolean {
+        return etText.text.toString().trim().isEmpty()
     }
 
-    private fun calcularMediaFinal(a1: String, a2: String, a3: String) {
-        val a1 = a1.toFloatOrNull()
-        val a2 = a2.toFloatOrNull()
-        val a3 = a3.toFloatOrNull()
-        if (a1 != null && a2 != null && a3 != null) {
-            val mediaFinal = (4 * a1 + 6 * (if (a2 > a3) a2 else a3)) / 10
-            notaFinal.text = "Nota Final: %.1f".format(mediaFinal)
-        }
-        notaFinalBTN.visibility = View.GONE
-        notaFinal.visibility = View.VISIBLE
+    private fun calcularMediaA1(ava1: Float, ava2: Float) {
+        val mediaA1 = (ava1 + ava2) / 2
+        binding.notaA1.text = mediaA1.roundToOneDecimalPlace().toString()
+        binding.btnCalculaA1.isEnabled = false
+        showComponents()
     }
 
-    private fun refresh() {
-        ava1.clear()
-        ava2.clear()
-        a2.clear()
-        a3.clear()
-        notaFinal.text = "Nota Final"
-        notaFinal.visibility = View.VISIBLE
-        notaFinalBTN.visibility = View.GONE
-        calcularA1BTN.visibility = View.VISIBLE
-        mA1.visibility = View.GONE
-        refresh.visibility = View.GONE
+    private fun calcularMediaFinal(a1: Float, a2: Float, a3: Float) {
+        val mediaFinal = (4 * a1 + 6 * (if (a2 > a3) a2 else a3)) / 10
+        if(mediaFinal < 6 || (mediaFinal > 10 && mediaFinal < 60)){
+            binding.resultadoTxt.text = "Reprovado"
+        }
+        binding.notaFinal.text = mediaFinal.roundToOneDecimalPlace().toString()
+        showResults()
+    }
+
+    private fun clear() {
+        binding.ava1.clear()
+        binding.ava2.clear()
+        binding.notaA2.clear()
+        binding.notaA3.clear()
+
+        hideComponents()
+        binding.btnCalculaA1.isEnabled = true
     }
 
     private fun EditText.clear() {
         text.clear()
     }
 
+    private fun Float.roundToOneDecimalPlace(): Float {
+        val df = DecimalFormat("#.#", DecimalFormatSymbols(Locale.ENGLISH)).apply {
+            roundingMode = RoundingMode.HALF_UP
+        }
+        return df.format(this).toFloat()
+    }
 }
 
