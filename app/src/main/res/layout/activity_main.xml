@@ -251,9 +251,7 @@
                     android:textSize="25sp"
                     android:id="@+id/resultadoTxt"
                     android:layout_margin="30px"
-                    android:textColor="@color/DarkBlue_UVA"
-
-                    android:drawableRight="@drawable/seta_launcher_foreground"/>
+                    android:textColor="@color/DarkBlue_UVA"/>
             </LinearLayout>
         </LinearLayout>
 
