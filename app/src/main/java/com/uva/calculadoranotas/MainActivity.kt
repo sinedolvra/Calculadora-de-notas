@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         binding.notaFinal.visibility = View.GONE
         binding.refresh.visibility = View.GONE
         binding.notasSegundaEtapa.visibility = View.GONE
+        binding.notaA1.text = ""
     }
     private fun showComponents(){
         binding.btnCalculaMediaFinal.visibility = View.VISIBLE
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun calcularMediaA1(ava1: Float, ava2: Float) {
         val mediaA1 = (ava1 + ava2) / 2
-        binding.notaA1.text = "%.1f".format(mediaA1)
+        binding.notaA1.text = mediaA1.roundToOneDecimalPlace().toString()
         binding.btnCalculaA1.isEnabled = false
         showComponents()
     }
